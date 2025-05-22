@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
+import ScrollAnimationTrigger from "@/components/utils/ScrollAnimationTrigger";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -15,8 +16,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "개발자 포트폴리오",
-  description: "개발자의 프로젝트 및 스킬을 소개하는 포트폴리오 웹사이트",
+  title: "garden's 포트폴리오",
+  description: "개발자 garden의 프로젝트 및 스킬을 소개하는 포트폴리오 웹사이트",
 };
 
 export default function RootLayout({
@@ -25,12 +26,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="ko">
+    <html lang="ko" className="scroll-smooth">
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen flex flex-col`}
       >
         <Header />
-        <main className="flex-1">{children}</main>
+        <main className="flex-1 pt-16">{children}</main>
+        <ScrollAnimationTrigger />
         <Footer />
       </body>
     </html>
