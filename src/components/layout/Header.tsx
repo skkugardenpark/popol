@@ -42,7 +42,7 @@ const Header = () => {
         <div className="flex justify-between h-16">
           <div className="flex-shrink-0 flex items-center">
             <Link href="#home" className="font-bold text-xl text-green-700 hover:text-green-600 transition-colors">
-              garden's 포트폴리오
+              garden&apos;s 포트폴리오
             </Link>
           </div>
           

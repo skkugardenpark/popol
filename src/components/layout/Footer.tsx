@@ -9,7 +9,7 @@ const Footer = () => {
         <div className="md:flex md:items-center md:justify-between">
           <div className="mt-8 md:mt-0 md:order-1">
             <p className="text-center text-sm text-gray-600">
-              &copy; {currentYear} garden's 포트폴리오. 모든 권리 보유.
+              &copy; {currentYear} garden&apos;s 포트폴리오. 모든 권리 보유.
             </p>
           </div>
           <div className="flex justify-center space-x-6 md:order-2">

@@ -1,7 +1,7 @@
 'use client';
 
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 // 3D 관련 import는 나중에 활성화
 // import * as THREE from "three";
 // import { Suspense } from "react";
@@ -22,11 +22,9 @@ import { useEffect, useState } from "react";
 // };
 
 export default function Home() {
-  const [scrollY, setScrollY] = useState(0);
-  
   useEffect(() => {
     const handleScroll = () => {
-      setScrollY(window.scrollY);
+      // 스크롤 이벤트 리스너 - 현재는 특별한 동작 없음
     };
     
     window.addEventListener("scroll", handleScroll);
