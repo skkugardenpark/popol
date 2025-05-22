@@ -1,4 +1,4 @@
-import Image from "next/image";
+// import Image from "next/image";
 
 export const metadata = {
   title: "소개 | 개발자 포트폴리오",

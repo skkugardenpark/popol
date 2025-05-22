@@ -1,4 +1,4 @@
-import Link from 'next/link';
+// import Link from 'next/link';
 
 export const metadata = {
   title: "프로젝트 | 개발자 포트폴리오",
