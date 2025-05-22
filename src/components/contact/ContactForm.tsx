@@ -46,7 +46,7 @@ const ContactForm = () => {
         subject: '',
         message: '',
       });
-    } catch (_) {
+    } catch {
       setSubmitStatus({
         success: false,
         message: '메시지 전송 중 오류가 발생했습니다. 잠시 후 다시 시도해주세요.',
