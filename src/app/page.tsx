@@ -29,7 +29,7 @@ const backendIcons = [
 const otherIcons = [
   { name: "Git", icon: "/icons/git.svg" },
   { name: "Docker", icon: "/icons/docker.svg" },
-  { name: "AWS", icon: "/icons/aws.svg" },
+  { name: "AWS", icon: "/icons/aws-color.png" },
   { name: "Jest", icon: "/icons/jest.svg" },
   { name: "Figma", icon: "/icons/figma.svg" },
 ];
