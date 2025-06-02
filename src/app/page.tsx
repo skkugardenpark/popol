@@ -303,11 +303,20 @@ export default function Home() {
                 onClick={() => openProjectModal(project)}
               >
                 <div className="h-36 sm:h-40 lg:h-48 bg-green-100 relative overflow-hidden">
-                  <div className="absolute inset-0 flex items-center justify-center text-green-500">
-                    <svg className="w-12 sm:w-14 lg:w-16 h-12 sm:h-14 lg:h-16" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                      <path fillRule="evenodd" d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z" clipRule="evenodd"></path>
-                    </svg>
-                  </div>
+                  {project.image ? (
+                    <Image 
+                      src={project.image} 
+                      alt={project.title}
+                      fill
+                      className="object-cover"
+                    />
+                  ) : (
+                    <div className="absolute inset-0 flex items-center justify-center text-green-500">
+                      <svg className="w-12 sm:w-14 lg:w-16 h-12 sm:h-14 lg:h-16" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                        <path fillRule="evenodd" d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z" clipRule="evenodd"></path>
+                      </svg>
+                    </div>
+                  )}
                 </div>
                 <div className="p-4 sm:p-6">
                   <h3 className="font-bold text-lg sm:text-xl mb-2 text-green-700">{project.title}</h3>
@@ -351,7 +360,7 @@ const projects = [
     title: "온라인 쇼핑몰",
     description: "React, Next.js, 그리고 Stripe를 사용하여 구축한 풀스택 이커머스 웹사이트입니다. 제품 검색, 장바구니, 결제 시스템을 구현했습니다.",
     stack: ["React", "Next.js", "TypeScript", "MongoDB", "Stripe", "Tailwind CSS"],
-    image: null,
+    image: "/project-images/shopping-mall.png",
     link: "https://github.com",
     demo: "https://example.com",
     features: [
@@ -367,7 +376,7 @@ const projects = [
     title: "실시간 채팅 애플리케이션",
     description: "Socket.IO와 React를 활용한 실시간 채팅 애플리케이션입니다. 사용자 인증, 개인 및 그룹 채팅, 알림 기능을 제공합니다.",
     stack: ["React", "Node.js", "Express", "Socket.IO", "MongoDB", "JWT"],
-    image: null,
+    image: "/project-images/chat-app.png",
     link: "https://github.com",
     demo: "https://example.com",
     features: [
@@ -383,7 +392,7 @@ const projects = [
     title: "작업 관리 대시보드",
     description: "React와 Redux를 사용하여 개발한 작업 관리 대시보드입니다. 기업 사용자를 위한 팀 작업 할당 및 마감일 추적 기능을 포함합니다.",
     stack: ["React", "Redux", "Node.js", "PostgreSQL", "Material UI", "Chart.js"],
-    image: null,
+    image: "/project-images/task-dashboard.png",
     link: "https://github.com",
     demo: "https://example.com",
     features: [
@@ -399,7 +408,7 @@ const projects = [
     title: "날씨 모바일 앱",
     description: "React Native로 개발한 날씨 예보 모바일 애플리케이션입니다. 위치 기반 서비스를 통해 실시간 날씨 정보와 5일 예보를 제공합니다.",
     stack: ["React Native", "Expo", "OpenWeather API", "Firebase"],
-    image: null,
+    image: "/project-images/weather-app.png",
     link: "https://github.com",
     demo: null,
     features: [
@@ -415,7 +424,7 @@ const projects = [
     title: "개인 블로그 플랫폼",
     description: "Gatsby와 GraphQL을 사용하여 구축한 정적 블로그 웹사이트입니다. 마크다운 게시물, 코드 구문 강조, 카테고리별 필터링 기능이 있습니다.",
     stack: ["Gatsby", "GraphQL", "Markdown", "Netlify", "Tailwind CSS"],
-    image: null,
+    image: "/project-images/blog-platform.png",
     link: "https://github.com",
     demo: "https://example.com",
     features: [
@@ -431,7 +440,7 @@ const projects = [
     title: "건강 추적 웹 앱",
     description: "운동 루틴 및 식이 습관 추적을 위한 웹 애플리케이션입니다. 사용자가 목표를 설정하고 진행 상황을 차트로 시각화할 수 있습니다.",
     stack: ["Vue.js", "Firebase", "Vuetify", "Chart.js"],
-    image: null,
+    image: "/project-images/health-tracker.png",
     link: "https://github.com",
     demo: "https://example.com",
     features: [

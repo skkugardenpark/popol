@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>온라인 쇼핑몰</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            padding: 0;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+            overflow: hidden;
+        }
+        
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 30px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+        
+        .logo {
+            font-size: 32px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .search-bar {
+            flex: 1;
+            max-width: 500px;
+            margin: 0 40px;
+            position: relative;
+        }
+        
+        .search-bar input {
+            width: 100%;
+            padding: 15px 25px;
+            border: none;
+            border-radius: 30px;
+            font-size: 16px;
+            background: rgba(255,255,255,0.95);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        
+        .search-bar input:focus {
+            outline: none;
+            background: white;
+            box-shadow: 0 6px 25px rgba(0,0,0,0.15);
+        }
+        
+        .header-actions {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+        
+        .wishlist-btn, .cart-btn {
+            background: rgba(255,255,255,0.2);
+            color: white;
+            padding: 12px 20px;
+            border-radius: 25px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255,255,255,0.3);
+        }
+        
+        .wishlist-btn:hover, .cart-btn:hover {
+            background: rgba(255,255,255,0.3);
+            transform: translateY(-2px);
+        }
+        
+        .cart-badge {
+            background: #ff4757;
+            color: white;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: bold;
+        }
+        
+        .main-content {
+            padding: 40px 30px;
+        }
+        
+        .hero-banner {
+            background: linear-gradient(135deg, #ff6b6b, #ffa500);
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 40px;
+            color: white;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero-banner::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 200px;
+            height: 200px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+        
+        .hero-title {
+            font-size: 36px;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+        
+        .hero-subtitle {
+            font-size: 18px;
+            opacity: 0.9;
+            margin-bottom: 25px;
+        }
+        
+        .hero-btn {
+            background: white;
+            color: #ff6b6b;
+            padding: 15px 30px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+        
+        .hero-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        }
+        
+        .categories {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 40px;
+            overflow-x: auto;
+            padding-bottom: 10px;
+        }
+        
+        .category {
+            padding: 12px 25px;
+            background: #f8f9fa;
+            border-radius: 25px;
+            color: #666;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+            border: 2px solid transparent;
+        }
+        
+        .category:hover {
+            background: #e9ecef;
+            transform: translateY(-2px);
+        }
+        
+        .category.active {
+            background: #667eea;
+            color: white;
+            border-color: #5a6fd8;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+        }
+        
+        .section-title {
+            font-size: 28px;
+            font-weight: bold;
+            margin-bottom: 30px;
+            color: #333;
+            text-align: center;
+        }
+        
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+        
+        .product-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            position: relative;
+            border: 1px solid #f0f0f0;
+        }
+        
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        }
+        
+        .product-image {
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 48px;
+        }
+        
+        .discount-badge {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            background: #ff4757;
+            color: white;
+            padding: 5px 12px;
+            border-radius: 15px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+        
+        .wishlist-icon {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            width: 35px;
+            height: 35px;
+            background: rgba(255,255,255,0.9);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .wishlist-icon:hover {
+            background: #ff4757;
+            color: white;
+            transform: scale(1.1);
+        }
+        
+        .product-info {
+            padding: 25px;
+        }
+        
+        .product-brand {
+            color: #888;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+        }
+        
+        .product-title {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #333;
+            line-height: 1.4;
+        }
+        
+        .product-rating {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 15px;
+        }
+        
+        .stars {
+            color: #ffd700;
+            font-size: 14px;
+        }
+        
+        .rating-text {
+            color: #666;
+            font-size: 12px;
+        }
+        
+        .product-price {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        
+        .current-price {
+            color: #667eea;
+            font-size: 22px;
+            font-weight: bold;
+        }
+        
+        .original-price {
+            color: #999;
+            font-size: 16px;
+            text-decoration: line-through;
+        }
+        
+        .product-actions {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .add-to-cart {
+            flex: 1;
+            padding: 12px;
+            background: #667eea;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+        
+        .add-to-cart:hover {
+            background: #5a6fd8;
+            transform: translateY(-2px);
+        }
+        
+        .quick-view {
+            padding: 12px;
+            background: #f8f9fa;
+            color: #667eea;
+            border: 2px solid #667eea;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+        
+        .quick-view:hover {
+            background: #667eea;
+            color: white;
+        }
+        
+        .delivery-info {
+            background: #e8f5e8;
+            color: #2d5a2d;
+            padding: 8px 12px;
+            border-radius: 8px;
+            font-size: 12px;
+            margin-top: 15px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="logo">
+                🛒 <span>MarketPlex</span>
+            </div>
+            <div class="search-bar">
+                <input type="text" placeholder="원하는 상품을 검색해보세요...">
+            </div>
+            <div class="header-actions">
+                <a href="#" class="wishlist-btn">
+                    ❤️ 찜한상품
+                </a>
+                <a href="#" class="cart-btn">
+                    🛒 장바구니
+                    <span class="cart-badge">3</span>
+                </a>
+            </div>
+        </div>
+        
+        <div class="main-content">
+            <div class="hero-banner">
+                <h1 class="hero-title">🎉 새해 특가 세일</h1>
+                <p class="hero-subtitle">모든 상품 최대 70% 할인! 1월 31일까지</p>
+                <a href="#" class="hero-btn">지금 쇼핑하기</a>
+            </div>
+            
+            <div class="categories">
+                <div class="category active">🔥 베스트</div>
+                <div class="category">👕 패션·의류</div>
+                <div class="category">💻 디지털·가전</div>
+                <div class="category">📚 도서·교육</div>
+                <div class="category">🏠 생활용품</div>
+                <div class="category">🎮 스포츠·레저</div>
+                <div class="category">🎨 뷰티·미용</div>
+            </div>
+            
+            <h2 class="section-title">🔥 오늘의 베스트 상품</h2>
+            
+            <div class="products-grid">
+                <div class="product-card">
+                    <div class="product-image">
+                        👕
+                        <div class="discount-badge">30% OFF</div>
+                        <div class="wishlist-icon">♡</div>
+                    </div>
+                    <div class="product-info">
+                        <div class="product-brand">PREMIUM BRAND</div>
+                        <div class="product-title">프리미엄 코튼 반팔 티셔츠</div>
+                        <div class="product-rating">
+                            <span class="stars">★★★★★</span>
+                            <span class="rating-text">4.8 (324)</span>
+                        </div>
+                        <div class="product-price">
+                            <span class="current-price">₩20,300</span>
+                            <span class="original-price">₩29,000</span>
+                        </div>
+                        <div class="product-actions">
+                            <button class="add-to-cart">장바구니 담기</button>
+                            <button class="quick-view">👁</button>
+                        </div>
+                        <div class="delivery-info">🚚 내일 새벽 배송</div>
+                    </div>
+                </div>
+                
+                <div class="product-card">
+                    <div class="product-image">
+                        🎧
+                        <div class="discount-badge">50% OFF</div>
+                        <div class="wishlist-icon">♡</div>
+                    </div>
+                    <div class="product-info">
+                        <div class="product-brand">TECH MASTER</div>
+                        <div class="product-title">노이즈 캔슬링 무선 헤드폰</div>
+                        <div class="product-rating">
+                            <span class="stars">★★★★☆</span>
+                            <span class="rating-text">4.6 (892)</span>
+                        </div>
+                        <div class="product-price">
+                            <span class="current-price">₩44,500</span>
+                            <span class="original-price">₩89,000</span>
+                        </div>
+                        <div class="product-actions">
+                            <button class="add-to-cart">장바구니 담기</button>
+                            <button class="quick-view">👁</button>
+                        </div>
+                        <div class="delivery-info">🚚 오늘 출발</div>
+                    </div>
+                </div>
+                
+                <div class="product-card">
+                    <div class="product-image">
+                        📱
+                        <div class="discount-badge">15% OFF</div>
+                        <div class="wishlist-icon">♡</div>
+                    </div>
+                    <div class="product-info">
+                        <div class="product-brand">SMART TECH</div>
+                        <div class="product-title">스마트폰 무선충전 거치대</div>
+                        <div class="product-rating">
+                            <span class="stars">★★★★★</span>
+                            <span class="rating-text">4.9 (156)</span>
+                        </div>
+                        <div class="product-price">
+                            <span class="current-price">₩29,750</span>
+                            <span class="original-price">₩35,000</span>
+                        </div>
+                        <div class="product-actions">
+                            <button class="add-to-cart">장바구니 담기</button>
+                            <button class="quick-view">👁</button>
+                        </div>
+                        <div class="delivery-info">🚚 2일 내 배송</div>
+                    </div>
+                </div>
+                
+                <div class="product-card">
+                    <div class="product-image">
+                        ⌚
+                        <div class="discount-badge">25% OFF</div>
+                        <div class="wishlist-icon">♡</div>
+                    </div>
+                    <div class="product-info">
+                        <div class="product-brand">LIFESTYLE</div>
+                        <div class="product-title">건강관리 스마트 워치 프로</div>
+                        <div class="product-rating">
+                            <span class="stars">★★★★☆</span>
+                            <span class="rating-text">4.5 (673)</span>
+                        </div>
+                        <div class="product-price">
+                            <span class="current-price">₩149,250</span>
+                            <span class="original-price">₩199,000</span>
+                        </div>
+                        <div class="product-actions">
+                            <button class="add-to-cart">장바구니 담기</button>
+                            <button class="quick-view">👁</button>
+                        </div>
+                        <div class="delivery-info">🚚 무료배송</div>
+                    </div>
+                </div>
+                
+                <div class="product-card">
+                    <div class="product-image">
+                        💻
+                        <div class="discount-badge">40% OFF</div>
+                        <div class="wishlist-icon">♡</div>
+                    </div>
+                    <div class="product-info">
+                        <div class="product-brand">PRO GEAR</div>
+                        <div class="product-title">게이밍 기계식 키보드 RGB</div>
+                        <div class="product-rating">
+                            <span class="stars">★★★★★</span>
+                            <span class="rating-text">4.7 (428)</span>
+                        </div>
+                        <div class="product-price">
+                            <span class="current-price">₩71,400</span>
+                            <span class="original-price">₩119,000</span>
+                        </div>
+                        <div class="product-actions">
+                            <button class="add-to-cart">장바구니 담기</button>
+                            <button class="quick-view">👁</button>
+                        </div>
+                        <div class="delivery-info">🚚 당일 배송</div>
+                    </div>
+                </div>
+                
+                <div class="product-card">
+                    <div class="product-image">
+                        📖
+                        <div class="wishlist-icon">♡</div>
+                    </div>
+                    <div class="product-info">
+                        <div class="product-brand">LEARNING HUB</div>
+                        <div class="product-title">웹 개발 완전정복 가이드북</div>
+                        <div class="product-rating">
+                            <span class="stars">★★★★★</span>
+                            <span class="rating-text">4.9 (1,203)</span>
+                        </div>
+                        <div class="product-price">
+                            <span class="current-price">₩35,000</span>
+                        </div>
+                        <div class="product-actions">
+                            <button class="add-to-cart">장바구니 담기</button>
+                            <button class="quick-view">👁</button>
+                        </div>
+                        <div class="delivery-info">📚 전자책 즉시 다운로드</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html> 

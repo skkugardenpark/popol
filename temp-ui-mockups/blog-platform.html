@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>개인 블로그</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .blog-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.1);
+        }
+        
+        .blog-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px 30px;
+            text-align: center;
+        }
+        
+        .blog-title {
+            font-size: 32px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        
+        .blog-subtitle {
+            font-size: 16px;
+            opacity: 0.9;
+            margin-bottom: 30px;
+        }
+        
+        .blog-nav {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+        }
+        
+        .nav-link {
+            color: white;
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 25px;
+            background: rgba(255,255,255,0.2);
+            transition: background 0.3s ease;
+        }
+        
+        .nav-link:hover,
+        .nav-link.active {
+            background: rgba(255,255,255,0.3);
+        }
+        
+        .main-content {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 40px;
+            padding: 40px 30px;
+        }
+        
+        .posts-section {
+            
+        }
+        
+        .section-title {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 30px;
+            color: #333;
+        }
+        
+        .post-card {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 25px;
+            border: 1px solid #eee;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .post-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        
+        .post-meta {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 15px;
+            font-size: 14px;
+            color: #666;
+        }
+        
+        .post-category {
+            background: #667eea;
+            color: white;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 12px;
+        }
+        
+        .post-title {
+            font-size: 22px;
+            font-weight: bold;
+            margin-bottom: 12px;
+            color: #333;
+            line-height: 1.4;
+        }
+        
+        .post-excerpt {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+        
+        .read-more {
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        
+        .sidebar {
+            
+        }
+        
+        .sidebar-widget {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 25px;
+            border: 1px solid #eee;
+        }
+        
+        .widget-title {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            color: #333;
+        }
+        
+        .category-list {
+            list-style: none;
+        }
+        
+        .category-list li {
+            margin-bottom: 10px;
+        }
+        
+        .category-list a {
+            color: #666;
+            text-decoration: none;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 0;
+        }
+        
+        .category-list a:hover {
+            color: #667eea;
+        }
+        
+        .post-count {
+            background: #e0e0e0;
+            color: #666;
+            padding: 2px 8px;
+            border-radius: 10px;
+            font-size: 12px;
+        }
+        
+        .recent-posts {
+            list-style: none;
+        }
+        
+        .recent-posts li {
+            margin-bottom: 15px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .recent-posts li:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+        
+        .recent-post-title {
+            color: #333;
+            text-decoration: none;
+            font-weight: 500;
+            display: block;
+            margin-bottom: 5px;
+            line-height: 1.4;
+        }
+        
+        .recent-post-title:hover {
+            color: #667eea;
+        }
+        
+        .recent-post-date {
+            color: #999;
+            font-size: 12px;
+        }
+        
+        .tag-cloud {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        
+        .tag {
+            background: #e0e0e0;
+            color: #666;
+            padding: 6px 12px;
+            border-radius: 15px;
+            text-decoration: none;
+            font-size: 12px;
+            transition: background 0.3s ease;
+        }
+        
+        .tag:hover {
+            background: #667eea;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="blog-container">
+        <div class="blog-header">
+            <h1 class="blog-title">📝 Garden's Tech Blog</h1>
+            <p class="blog-subtitle">개발과 기술에 대한 생각을 기록하는 공간입니다</p>
+            
+            <nav class="blog-nav">
+                <a href="#" class="nav-link active">홈</a>
+                <a href="#" class="nav-link">카테고리</a>
+                <a href="#" class="nav-link">태그</a>
+                <a href="#" class="nav-link">소개</a>
+                <a href="#" class="nav-link">연락처</a>
+            </nav>
+        </div>
+        
+        <div class="main-content">
+            <main class="posts-section">
+                <h2 class="section-title">최신 포스트</h2>
+                
+                <article class="post-card">
+                    <div class="post-meta">
+                        <span class="post-category">React</span>
+                        <span>2024.12.20</span>
+                        <span>👀 124</span>
+                    </div>
+                    <h3 class="post-title">React 18의 새로운 기능들과 성능 최적화 방법</h3>
+                    <p class="post-excerpt">
+                        React 18에서 새롭게 추가된 Concurrent Features와 Suspense의 개선사항에 대해 알아보고, 
+                        실제 프로젝트에서 어떻게 활용할 수 있는지 예제와 함께 설명합니다...
+                    </p>
+                    <a href="#" class="read-more">더 읽기 →</a>
+                </article>
+                
+                <article class="post-card">
+                    <div class="post-meta">
+                        <span class="post-category">Next.js</span>
+                        <span>2024.12.18</span>
+                        <span>👀 89</span>
+                    </div>
+                    <h3 class="post-title">Next.js 14 App Router 완벽 가이드</h3>
+                    <p class="post-excerpt">
+                        Next.js 14의 App Router를 활용한 풀스택 웹 애플리케이션 개발 방법을 단계별로 설명합니다. 
+                        Server Components부터 Dynamic Routing까지...
+                    </p>
+                    <a href="#" class="read-more">더 읽기 →</a>
+                </article>
+                
+                <article class="post-card">
+                    <div class="post-meta">
+                        <span class="post-category">TypeScript</span>
+                        <span>2024.12.15</span>
+                        <span>👀 156</span>
+                    </div>
+                    <h3 class="post-title">TypeScript 고급 타입 시스템 활용하기</h3>
+                    <p class="post-excerpt">
+                        TypeScript의 고급 타입 기능들을 활용하여 더 안전하고 표현력 있는 코드를 작성하는 방법을 
+                        실제 사례와 함께 소개합니다...
+                    </p>
+                    <a href="#" class="read-more">더 읽기 →</a>
+                </article>
+                
+                <article class="post-card">
+                    <div class="post-meta">
+                        <span class="post-category">DevOps</span>
+                        <span>2024.12.12</span>
+                        <span>👀 201</span>
+                    </div>
+                    <h3 class="post-title">Docker와 GitHub Actions로 CI/CD 파이프라인 구축하기</h3>
+                    <p class="post-excerpt">
+                        Docker 컨테이너와 GitHub Actions를 활용하여 자동화된 배포 파이프라인을 구축하는 
+                        전체 과정을 단계별로 설명합니다...
+                    </p>
+                    <a href="#" class="read-more">더 읽기 →</a>
+                </article>
+            </main>
+            
+            <aside class="sidebar">
+                <div class="sidebar-widget">
+                    <h3 class="widget-title">카테고리</h3>
+                    <ul class="category-list">
+                        <li><a href="#">React <span class="post-count">12</span></a></li>
+                        <li><a href="#">Next.js <span class="post-count">8</span></a></li>
+                        <li><a href="#">TypeScript <span class="post-count">15</span></a></li>
+                        <li><a href="#">JavaScript <span class="post-count">20</span></a></li>
+                        <li><a href="#">DevOps <span class="post-count">6</span></a></li>
+                        <li><a href="#">기타 <span class="post-count">9</span></a></li>
+                    </ul>
+                </div>
+                
+                <div class="sidebar-widget">
+                    <h3 class="widget-title">최근 포스트</h3>
+                    <ul class="recent-posts">
+                        <li>
+                            <a href="#" class="recent-post-title">React 18의 새로운 기능들과 성능 최적화</a>
+                            <div class="recent-post-date">2024.12.20</div>
+                        </li>
+                        <li>
+                            <a href="#" class="recent-post-title">Next.js 14 App Router 완벽 가이드</a>
+                            <div class="recent-post-date">2024.12.18</div>
+                        </li>
+                        <li>
+                            <a href="#" class="recent-post-title">TypeScript 고급 타입 시스템 활용하기</a>
+                            <div class="recent-post-date">2024.12.15</div>
+                        </li>
+                        <li>
+                            <a href="#" class="recent-post-title">Docker와 GitHub Actions로 CI/CD 구축</a>
+                            <div class="recent-post-date">2024.12.12</div>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="sidebar-widget">
+                    <h3 class="widget-title">태그</h3>
+                    <div class="tag-cloud">
+                        <a href="#" class="tag">React</a>
+                        <a href="#" class="tag">JavaScript</a>
+                        <a href="#" class="tag">TypeScript</a>
+                        <a href="#" class="tag">Next.js</a>
+                        <a href="#" class="tag">Node.js</a>
+                        <a href="#" class="tag">CSS</a>
+                        <a href="#" class="tag">웹개발</a>
+                        <a href="#" class="tag">프론트엔드</a>
+                        <a href="#" class="tag">백엔드</a>
+                    </div>
+                </div>
+            </aside>
+        </div>
+    </div>
+</body>
+</html> 
