@@ -2,7 +2,8 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import ProjectModal from "@/components/ProjectModal";
 // 3D 관련 import는 나중에 활성화
 // import * as THREE from "three";
 // import { Suspense } from "react";
@@ -48,6 +49,19 @@ const otherIcons = [
 // };
 
 export default function Home() {
+  const [selectedProject, setSelectedProject] = useState<typeof projects[0] | null>(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const openProjectModal = (project: typeof projects[0]) => {
+    setSelectedProject(project);
+    setIsModalOpen(true);
+  };
+
+  const closeProjectModal = () => {
+    setIsModalOpen(false);
+    setSelectedProject(null);
+  };
+
   useEffect(() => {
     const handleScroll = () => {
       // 스크롤 이벤트 리스너 - 현재는 특별한 동작 없음
@@ -285,7 +299,8 @@ export default function Home() {
             {projects.map((project, index) => (
               <div 
                 key={project.id} 
-                className={`card-3d bg-white rounded-lg overflow-hidden shadow-lg border border-gray-100 hover:shadow-xl transition-all ${index % 2 === 0 ? 'fade-in' : 'rotate-in'}`}
+                className={`card-3d bg-white rounded-lg overflow-hidden shadow-lg border border-gray-100 hover:shadow-xl transition-all cursor-pointer ${index % 2 === 0 ? 'fade-in' : 'rotate-in'}`}
+                onClick={() => openProjectModal(project)}
               >
                 <div className="h-36 sm:h-40 lg:h-48 bg-green-100 relative overflow-hidden">
                   <div className="absolute inset-0 flex items-center justify-center text-green-500">
@@ -309,32 +324,8 @@ export default function Home() {
                       </span>
                     )}
                   </div>
-                  <div className="flex flex-col sm:flex-row gap-2 sm:gap-4 mt-3 sm:mt-4">
-                    <a 
-                      href={project.link} 
-                      target="_blank" 
-                      rel="noopener noreferrer" 
-                      className="text-green-600 hover:text-green-800 font-medium text-xs sm:text-sm flex items-center justify-center sm:justify-start"
-                    >
-                      <svg className="w-3 sm:w-4 h-3 sm:h-4 mr-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                        <path fillRule="evenodd" d="M12.316 3.051a1 1 0 01.633 1.265l-4 12a1 1 0 11-1.898-.632l4-12a1 1 0 011.265-.633zM5.707 6.293a1 1 0 010 1.414L3.414 10l2.293 2.293a1 1 0 11-1.414 1.414l-3-3a1 1 0 010-1.414l3-3a1 1 0 011.414 0zm8.586 0a1 1 0 011.414 0l3 3a1 1 0 010 1.414l-3 3a1 1 0 11-1.414-1.414L16.586 10l-2.293-2.293a1 1 0 010-1.414z" clipRule="evenodd"></path>
-                      </svg>
-                      코드 보기
-                    </a>
-                    {project.demo && (
-                      <a 
-                        href={project.demo} 
-                        target="_blank" 
-                        rel="noopener noreferrer" 
-                        className="text-green-600 hover:text-green-800 font-medium text-xs sm:text-sm flex items-center justify-center sm:justify-start"
-                      >
-                        <svg className="w-3 sm:w-4 h-3 sm:h-4 mr-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                          <path d="M10 12a2 2 0 100-4 2 2 0 000 4z"></path>
-                          <path fillRule="evenodd" d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z" clipRule="evenodd"></path>
-                        </svg>
-                        데모 보기
-                      </a>
-                    )}
+                  <div className="text-center text-green-600 text-sm font-medium">
+                    클릭하여 자세히 보기
                   </div>
                 </div>
               </div>
@@ -342,6 +333,13 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      {/* 프로젝트 모달 */}
+      <ProjectModal 
+        project={selectedProject}
+        isOpen={isModalOpen}
+        onClose={closeProjectModal}
+      />
     </>
   );
 }
