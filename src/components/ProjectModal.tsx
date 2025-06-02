@@ -10,6 +10,7 @@ interface Project {
   image: string | null;
   link: string;
   demo: string | null;
+  features: string[];
 }
 
 interface ProjectModalProps {
@@ -106,56 +107,32 @@ export default function ProjectModal({ project, isOpen, onClose }: ProjectModalP
             </div>
           </div>
 
-          {/* 주요 기능 (예시) */}
+          {/* 주요 기능 */}
           <div className="mb-6">
             <h3 className="text-lg font-semibold text-gray-800 mb-3">주요 기능</h3>
             <ul className="space-y-2 text-gray-700">
-              <li className="flex items-start">
-                <span className="text-green-600 mr-2">•</span>
-                반응형 웹 디자인으로 모든 디바이스에서 최적화된 사용자 경험 제공
-              </li>
-              <li className="flex items-start">
-                <span className="text-green-600 mr-2">•</span>
-                직관적이고 사용하기 쉬운 인터페이스 구현
-              </li>
-              <li className="flex items-start">
-                <span className="text-green-600 mr-2">•</span>
-                성능 최적화를 통한 빠른 로딩 속도 구현
-              </li>
-              <li className="flex items-start">
-                <span className="text-green-600 mr-2">•</span>
-                안전하고 신뢰할 수 있는 데이터 처리
-              </li>
+              {project.features.map((feature, index) => (
+                <li key={index} className="flex items-start">
+                  <span className="text-green-600 mr-2">•</span>
+                  {feature}
+                </li>
+              ))}
             </ul>
           </div>
 
           {/* 액션 버튼 */}
-          <div className="flex flex-col sm:flex-row gap-3 pt-4 border-t border-gray-200">
+          <div className="flex justify-center pt-4 border-t border-gray-200">
             <a 
               href={project.link} 
               target="_blank" 
               rel="noopener noreferrer" 
-              className="flex-1 bg-green-600 text-white px-6 py-3 rounded-lg font-medium hover:bg-green-700 transition-colors flex items-center justify-center"
+              className="bg-green-600 text-white px-8 py-3 rounded-lg font-medium hover:bg-green-700 transition-colors flex items-center justify-center"
             >
               <svg className="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                 <path fillRule="evenodd" d="M12.316 3.051a1 1 0 01.633 1.265l-4 12a1 1 0 11-1.898-.632l4-12a1 1 0 011.265-.633zM5.707 6.293a1 1 0 010 1.414L3.414 10l2.293 2.293a1 1 0 11-1.414 1.414l-3-3a1 1 0 010-1.414l3-3a1 1 0 011.414 0zm8.586 0a1 1 0 011.414 0l3 3a1 1 0 010 1.414l-3 3a1 1 0 11-1.414-1.414L16.586 10l-2.293-2.293a1 1 0 010-1.414z" clipRule="evenodd"></path>
               </svg>
               GitHub에서 코드 보기
             </a>
-            {project.demo && (
-              <a 
-                href={project.demo} 
-                target="_blank" 
-                rel="noopener noreferrer" 
-                className="flex-1 bg-white text-green-600 px-6 py-3 rounded-lg font-medium border-2 border-green-600 hover:bg-green-50 transition-colors flex items-center justify-center"
-              >
-                <svg className="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M10 12a2 2 0 100-4 2 2 0 000 4z"></path>
-                  <path fillRule="evenodd" d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z" clipRule="evenodd"></path>
-                </svg>
-                라이브 데모 보기
-              </a>
-            )}
           </div>
         </div>
       </div>

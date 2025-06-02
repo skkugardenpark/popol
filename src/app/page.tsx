@@ -354,6 +354,13 @@ const projects = [
     image: null,
     link: "https://github.com",
     demo: "https://example.com",
+    features: [
+      "상품 검색 및 필터링 기능으로 원하는 제품을 쉽게 찾을 수 있음",
+      "장바구니 기능으로 여러 상품을 담고 수량 조절 가능",
+      "Stripe 결제 시스템 연동으로 안전한 온라인 결제 처리",
+      "사용자 계정 관리 및 주문 내역 조회 기능",
+      "반응형 디자인으로 모바일과 데스크톱에서 최적화된 쇼핑 경험"
+    ]
   },
   {
     id: 2,
@@ -363,6 +370,13 @@ const projects = [
     image: null,
     link: "https://github.com",
     demo: "https://example.com",
+    features: [
+      "Socket.IO를 활용한 실시간 메시지 송수신",
+      "1:1 개인 채팅 및 그룹 채팅방 생성 기능",
+      "JWT 토큰 기반 사용자 인증 및 보안 관리",
+      "실시간 알림 및 읽지 않은 메시지 표시",
+      "온라인/오프라인 상태 표시 및 타이핑 인디케이터"
+    ]
   },
   {
     id: 3,
@@ -372,6 +386,13 @@ const projects = [
     image: null,
     link: "https://github.com",
     demo: "https://example.com",
+    features: [
+      "칸반 보드 스타일의 직관적인 작업 관리 인터페이스",
+      "팀원별 작업 할당 및 진행 상황 추적",
+      "마감일 알림 및 우선순위 설정 기능",
+      "Chart.js를 활용한 프로젝트 진행률 시각화",
+      "팀 협업을 위한 댓글 및 파일 첨부 기능"
+    ]
   },
   {
     id: 4,
@@ -381,6 +402,13 @@ const projects = [
     image: null,
     link: "https://github.com",
     demo: null,
+    features: [
+      "GPS 기반 현재 위치의 실시간 날씨 정보 제공",
+      "5일간의 상세한 날씨 예보 및 시간별 날씨 변화",
+      "다양한 날씨 조건에 맞는 직관적인 아이콘 및 애니메이션",
+      "즐겨찾기 도시 추가 및 여러 지역 날씨 비교",
+      "날씨 알림 설정 및 푸시 알림 기능"
+    ]
   },
   {
     id: 5,
@@ -390,6 +418,13 @@ const projects = [
     image: null,
     link: "https://github.com",
     demo: "https://example.com",
+    features: [
+      "마크다운 기반의 편리한 글 작성 및 관리",
+      "Prism.js를 활용한 코드 구문 강조 및 복사 기능",
+      "카테고리 및 태그 기반 게시물 분류 및 검색",
+      "SEO 최적화 및 빠른 로딩 속도를 위한 정적 사이트 생성",
+      "댓글 시스템 및 소셜 미디어 공유 기능"
+    ]
   },
   {
     id: 6,
@@ -399,5 +434,12 @@ const projects = [
     image: null,
     link: "https://github.com",
     demo: "https://example.com",
+    features: [
+      "개인별 운동 루틴 생성 및 운동 기록 추적",
+      "칼로리 계산 및 영양소 분석을 통한 식단 관리",
+      "Chart.js를 활용한 운동량 및 체중 변화 시각화",
+      "목표 설정 및 달성률 추적으로 동기부여 제공",
+      "Firebase를 통한 실시간 데이터 동기화 및 백업"
+    ]
   },
 ];
